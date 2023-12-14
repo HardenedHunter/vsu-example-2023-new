@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Product, ProductsRequestParams } from "~/types";
 
 export const useProducts = (initialProducts: Product[]) => {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [products, setProducts] = useState(initialProducts);
   const [isLoading, setIsLoading] = useState(false);
 
   const refetch = async (params: ProductsRequestParams) => {
