@@ -1,9 +1,9 @@
-export type ProductsOrder = "asc" | "desc";
+export type ProductsSort = "asc" | "desc";
 
 export type ProductsLimit = "5" | "10" | "20";
 
 export type ProductsRequestParams = {
-  order: ProductsOrder;
+  sort: ProductsSort;
   limit: ProductsLimit;
 };
 

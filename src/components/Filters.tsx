@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 
-import { ProductsRequestParams, ProductsLimit, ProductsOrder } from "~/types";
+import { ProductsRequestParams, ProductsLimit, ProductsSort } from "~/types";
 import { DropDown } from "~/components";
 
-const orderOptions: ProductsOrder[] = ["asc", "desc"];
+const sortOptions: ProductsSort[] = ["asc", "desc"];
 const limitOptions: ProductsLimit[] = ["5", "10", "20"];
 
 type FiltersProps = {
@@ -11,22 +11,22 @@ type FiltersProps = {
 };
 
 export const Filters: FC<FiltersProps> = ({ onFiltersChange }) => {
-  const [order, setOrder] = useState<ProductsOrder>("asc");
+  const [sort, setSort] = useState<ProductsSort>("asc");
   const [limit, setLimit] = useState<ProductsLimit>("20");
 
-  const onOrderChange = (value: ProductsOrder) => {
-    setOrder(value);
-    onFiltersChange({ order: value, limit });
+  const onSortChange = (value: ProductsSort) => {
+    setSort(value);
+    onFiltersChange({ sort: value, limit });
   };
 
   const onLimitChange = (value: ProductsLimit) => {
     setLimit(value);
-    onFiltersChange({ limit: value, order });
+    onFiltersChange({ limit: value, sort });
   };
 
   return (
     <div className="flex gap-4">
-      <DropDown value={order} onChange={onOrderChange} options={orderOptions} />
+      <DropDown value={sort} onChange={onSortChange} options={sortOptions} />
       <DropDown value={limit} onChange={onLimitChange} options={limitOptions} />
     </div>
   );

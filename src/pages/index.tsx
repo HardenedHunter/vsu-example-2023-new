@@ -1,11 +1,11 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { FC } from "react";
-import axios from "axios";
 
 import { Product } from "~/types";
 import { ProductCard, Filters } from "~/components";
 import { useProducts } from "~/hooks";
+import { api } from "~/api";
 
 type HomeProps = {
   products: Product[];
@@ -36,9 +36,7 @@ const Home: FC<HomeProps> = ({ products: initialProducts }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const response = await axios.get<Product[]>(
-    "https://fakestoreapi.com/products",
-  );
+  const response = await api.products.getProducts();
 
   return { props: { products: response.data } };
 };

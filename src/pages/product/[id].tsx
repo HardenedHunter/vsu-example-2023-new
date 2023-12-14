@@ -1,9 +1,9 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { FC } from "react";
-import axios from "axios";
 
 import { Product } from "~/types";
+import { api } from "~/api";
 
 type ProductPageProps = {
   product: Product;
@@ -39,9 +39,15 @@ export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
     };
   }
 
-  const response = await axios.get<Product>(
-    `https://fakestoreapi.com/products/${id}`,
-  );
+  const numberId = parseInt(id);
+
+  if (Number.isNaN(numberId)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const response = await api.products.getProductById(numberId);
 
   return { props: { product: response.data } };
 };

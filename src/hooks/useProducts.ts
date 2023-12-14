@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
+import { api } from "~/api";
 
 import { Product, ProductsRequestParams } from "~/types";
 
@@ -11,10 +11,7 @@ export const useProducts = (initialProducts: Product[]) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get<Product[]>(
-        "https://fakestoreapi.com/products",
-        { params: { sort: params.order, limit: params.limit } },
-      );
+      const response = await api.products.getProducts(params);
 
       setProducts(response.data);
     } catch {
